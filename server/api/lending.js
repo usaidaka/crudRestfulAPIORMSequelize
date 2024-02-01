@@ -8,8 +8,6 @@ const fileName = "server/api/lending.js";
 
 const lendingList = async (request, reply) => {
   try {
-    Validation.pokemonListValidation(request.query);
-
     const response = await LendingHelper.getLendingList();
 
     return reply.send(response);

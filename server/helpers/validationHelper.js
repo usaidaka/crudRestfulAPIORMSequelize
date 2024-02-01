@@ -32,7 +32,51 @@ const editCustomer = (data) => {
   }
 };
 
+const addBook = (data) => {
+  const schema = Joi.object({
+    title: Joi.string()
+      .min(3)
+      .max(20)
+      .required()
+      .description("name; i.e. Usaid AKA"),
+    author: Joi.string()
+      .min(3)
+      .max(20)
+      .required()
+      .description("author; i.e. Tere Liye"),
+    idCategory: Joi.number()
+      .required()
+      .description("address; i.e. Jl TB Simatupang"),
+  });
+  if (schema.validate(data).error) {
+    throw Boom.badRequest(schema.validate(data).error);
+  }
+};
+
+const editBook = (data) => {
+  const schema = Joi.object({
+    title: Joi.string()
+      .min(3)
+      .max(20)
+      .optional()
+      .description("name; i.e. Usaid AKA"),
+    author: Joi.string()
+      .min(3)
+      .max(20)
+      .optional()
+      .description("author; i.e. Tere Liye"),
+    idCategory: Joi.number()
+      .optional()
+      .description("address; i.e. Jl TB Simatupang"),
+  });
+  if (schema.validate(data).error) {
+    throw Boom.badRequest(schema.validate(data).error);
+  }
+};
+
 module.exports = {
   addCustomer,
   editCustomer,
+  addBook,
+  editBook,
 };

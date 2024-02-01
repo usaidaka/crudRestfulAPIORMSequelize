@@ -136,7 +136,8 @@ const patchCustomer = async (id, data) => {
 
     response = {
       ok: true,
-      message: `Congrats! Customer : ${name}'s data successfully updated `,
+      message: `Congrats! Customer : ${isCustomerExist.result?.name}'s data successfully updated `,
+      result: data,
     };
     await transaction.commit();
     return response;

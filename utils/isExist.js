@@ -60,6 +60,37 @@ const isCustomerExist = async (data) => {
   }
 };
 
+const isBookExist = async (data) => {
+  let response = {};
+  const { title } = data;
+  try {
+    let isTitleExist;
+
+    if (title) {
+      isTitleExist = await db.Book.findOne({ where: { title } });
+    }
+    if (isTitleExist) {
+      response = {
+        ok: false,
+        message: `Unfortunately! this book's title is used`,
+      };
+      return response;
+    }
+
+    response = {
+      ok: true,
+      message: `Congrats! All data input is literally new`,
+    };
+    return response;
+  } catch (err) {
+    console.log([fileName, "Is customer name exist", "ERROR"], {
+      info: `${err}`,
+    });
+    return Promise.reject(GeneralHelper.errorResponse(err));
+  }
+};
+
 module.exports = {
   isCustomerExist,
+  isBookExist,
 };
