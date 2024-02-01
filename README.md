@@ -1,5 +1,3 @@
-# Node express boilerplate
-
 # Rental Book Shop
 
 ## Welcome to Rental Book Shop!
