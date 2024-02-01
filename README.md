@@ -1,48 +1,60 @@
 # Node express boilerplate
 
-# Editing this README
+# Rental Book Shop
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## Welcome to Rental Book Shop!
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+first of all. you can clone this repo if you wanna use my backend application. Next, follow step that i mention bellow
 
-## Name
-Choose a self-explaining name for your project.
+## install
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+run: npm install
+this command for installing all package or dependencies that i used in this project
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+run: npx sequelize-cli db:create
+make sure you are already connected with your local MySQL or etc. this command use for create a new schema. you can set up your config db in config folder by using .env files. i also attached .env.exp
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+run: npx sequelize-cli db:migrate
+make sure the previous command already running and you have your own schema in your DB. so, this command will be migrate all table that we need.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+run: npx sequelize-cli db:seed:all
+i also provide many initial data that you can use for trial query. or even you wanna try CRUD operation, you can immediately hit those API.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Postman Collection
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+i serve postman collection for your easy access. you can read all those API collection there. i will attach for any hint endpoint for your API:
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+### Customer Endpoint
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+- (GET) /api/customer/ : GET ALL CUSTOMER DATA
+  > these endpoint are equipped with query search by name
+  > /api/customer/?name=aka
+- (POST) /api/customer : CREATE NEW CUSTOMER
+  > this endpoint ask you to send name, email, phone and address (all field are required)
+- (GET) /api/customer/:id : GET CUSTOMER DETAIL
+- (PATCH) /api/customer/:id : EDIT CUSTOMER
+  > this endpoint ask you to send name, email, phone and address (all field are optional)
+- (DELETE) /api/customer/:id : DELETE CUSTOMER
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### Book Endpoint
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+- (GET) /api/book/ : GET ALL BOOK DATA
+  > these endpoint are equipped with query search by name
+  > /api/book/?title=negeri para bedebah
+- (POST) /api/book : CREATE NEW BOOK
+  > this endpoint ask you to send title, author, and id category (all field are required)
+- (GET) /api/book/:id : GET BOOK DETAIL
+- (PATCH) /api/book/:id : EDIT BOOK
+  > this endpoint ask you to send title, author, and id category (all field are optional)
+- (DELETE) /api/book/:id : DELETE CUSTBOOKMER
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### Lending Endpoint
 
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- (GET) /api/lending/ : GET ALL LENDING DATA
+  > this endpoint ask you to send body with email and idBook
+- (GET) /api/lending/:id : GET CUSTOMER'S LENDING LIST
+- (POST) /api/lending/ : CREATE LENDING
+  > by hit this endpoint, it means the customer will lend the book that signed with idBook (all field are required)
+- (DELETE) /api/lending/ : DELETE LENDING
+  > this endpoint ask you to send body with email and idBook
+  > this api means if customer wanna returned their lending book. we have to delete their id Customer + id Book in lending table
