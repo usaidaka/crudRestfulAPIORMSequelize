@@ -41,7 +41,7 @@ const isCustomerExist = async (data) => {
       if (isEmailExist) {
         response = {
           ok: false,
-          message: `Unfortunately! this customer's email number is already used`,
+          message: `Unfortunately! this customer's email is already used`,
         };
         return response;
       }
