@@ -1,17 +1,16 @@
 const Router = require("express").Router();
 
 const Validation = require("../helpers/validationHelper");
-const PokemonHelper = require("../helpers/pokemonHelper");
+const BookHelper = require("../helpers/bookHelper");
 const GeneralHelper = require("../helpers/generalHelper");
 
-const fileName = "server/api/pokemon.js";
+const fileName = "server/api/book.js";
 
-const list = async (request, reply) => {
+const bookList = async (request, reply) => {
   try {
     Validation.pokemonListValidation(request.query);
 
-    const { name } = request.query;
-    const response = await PokemonHelper.getPokemonList({ name });
+    const response = await BookHelper.getBookList();
 
     return reply.send(response);
   } catch (err) {
@@ -20,6 +19,6 @@ const list = async (request, reply) => {
   }
 };
 
-Router.get("/list", list);
+Router.get("/book", bookList);
 
 module.exports = Router;
