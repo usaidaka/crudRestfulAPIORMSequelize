@@ -8,11 +8,13 @@ const fileName = "server/api/customer.js";
 
 const customerList = async (request, reply) => {
   try {
-    Validation.pokemonListValidation(request.query);
-
     const response = await CustomerHelper.getCustomerList();
 
-    return reply.send(response);
+    if (!response.ok) {
+      return reply.status(404).json(response);
+    }
+
+    return reply.status(200).json(response);
   } catch (err) {
     console.log([fileName, "list", "ERROR"], { info: `${err}` });
     return reply.send(GeneralHelper.errorResponse(err));
