@@ -8,7 +8,8 @@ const fileName = "server/api/book.js";
 
 const bookList = async (request, reply) => {
   try {
-    const response = await BookHelper.getBookList();
+    const { title } = request.query;
+    const response = await BookHelper.getBookList(title);
     if (!response.ok) {
       return reply.status(404).json(response);
     }

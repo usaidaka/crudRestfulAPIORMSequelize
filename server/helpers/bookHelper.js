@@ -1,14 +1,19 @@
-const _ = require("lodash");
+const { Op } = require("sequelize");
 const db = require("../../models");
 const GeneralHelper = require("./generalHelper");
 const isExist = require("../../utils/isExist");
 
 const fileName = "server/helpers/bookHelper.js";
 
-const getBookList = async () => {
+const getBookList = async (title) => {
   let response = {};
+  let query = {};
   try {
+    if (title) {
+      query = { title: { [Op.like]: `%${title}%` } };
+    }
     const result = await db.Book.findAll({
+      where: query,
       attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
       include: [
         {

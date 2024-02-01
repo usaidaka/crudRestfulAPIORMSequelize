@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Customer Copy",
+			"name": "Customer",
 			"item": [
 				{
 					"name": "Get All Customer",
@@ -15,7 +15,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/customer",
+							"raw": "http://localhost:8080/api/customer/?name=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -23,7 +23,14 @@
 							"port": "8080",
 							"path": [
 								"api",
-								"customer"
+								"customer",
+								""
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -151,7 +158,7 @@
 			]
 		},
 		{
-			"name": "Book Copy",
+			"name": "Book",
 			"item": [
 				{
 					"name": "Get All Book",
@@ -304,10 +311,10 @@
 			]
 		},
 		{
-			"name": "Lending Copy",
+			"name": "Lending",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Get All Lending Data",
 					"request": {
 						"method": "GET",
 						"header": [],

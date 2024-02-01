@@ -1,14 +1,19 @@
-const _ = require("lodash");
+const { Op } = require("sequelize");
 const db = require("../../models");
 const isExist = require("../../utils/isExist");
 const GeneralHelper = require("./generalHelper");
 
 const fileName = "server/helpers/customerHelper.js";
 
-const getCustomerList = async () => {
+const getCustomerList = async (name) => {
   let response = {};
+  let query = {};
   try {
+    if (name) {
+      query = { name: { [Op.like]: `%${name}%` } };
+    }
     const result = await db.Customer.findAll({
+      where: query,
       attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
     });
 

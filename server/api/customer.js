@@ -8,7 +8,8 @@ const fileName = "server/api/customer.js";
 
 const customerList = async (request, reply) => {
   try {
-    const response = await CustomerHelper.getCustomerList();
+    const { name } = request.query;
+    const response = await CustomerHelper.getCustomerList(name);
 
     if (!response.ok) {
       return reply.status(404).json(response);
